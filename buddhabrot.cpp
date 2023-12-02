@@ -158,101 +158,7 @@ class buddhabrot {
  * and write them to a png file
  */
  
-// void write(const std::string& filename,
-//            const std::vector<std::unique_ptr<buddhabrot>>& brots,
-//            const idx image_size) {
-//     double max_val = 0;
-//     double min_val = std::numeric_limits<double>::infinity();
-//     for (idx u = 0; u < image_size; u++) {
-//         for (idx v = 0; v < image_size; v++) {
-//             double x = 0;
-//             for (auto& b : brots) {
-//                 x += (*b)(u, v);
-//             }
-//             if (x < min_val) {
-//                 min_val = x;
-//             }
-//             if (x > max_val) {
-//                 max_val = x;
-//             }
-//         }
-//     }
 
-//     png::image<png::gray_pixel_16> pimage(image_size, image_size);
-//     for (idx u = 0; u < image_size; u++) {
-//         for (idx v = 0; v < image_size; v++) {
-//             double x = 0;
-//             for (auto& b : brots) {
-//                 x += (*b)(u, v);
-//                 x += (*b)(u, image_size - 1 - v);
-//             }
-//             pimage[u][v] = png::gray_pixel_16(
-//                 ((1 << 16) - 1) *
-//                 std::sqrt((x * 0.5 - min_val) / (max_val - min_val)));
-//         }
-//     }
-//     pimage.write(filename);
-// }
-// void write(const std::string& filename,
-//            const std::vector<std::unique_ptr<buddhabrot>>& brots,
-//            const idx image_size) {
-//     double max_val = 0;
-//     double min_val = std::numeric_limits<double>::infinity();
-//     for (idx u = 0; u < image_size; u++) {
-//         for (idx v = 0; v < image_size; v++) {
-//             double x = 0;
-//             for (auto& b : brots) {
-//                 x += (*b)(u, v);
-//             }
-//             if (x < min_val) {
-//                 min_val = x;
-//             }
-//             if (x > max_val) {
-//                 max_val = x;
-//             }
-//         }
-//     }
-
-//     png_bytepp pimage;
-//     pimage = new png_bytep[image_size];
-//     for (idx u = 0; u < image_size; u++) {
-//         pimage[u] = new png_byte[image_size * 2];
-//         for (idx v = 0; v < image_size; v++) {
-//             double x = 0;
-//             for (auto& b : brots) {
-//                 x += (*b)(u, v);
-//                 x += (*b)(u, image_size - 1 - v);
-//             }
-//             double value = ((1 << 16) - 1) * std::sqrt((x * 0.5 - min_val) / (max_val - min_val));
-//             png_byte gray_value = static_cast<png_byte>(value);
-//             pimage[u][v * 2] = gray_value;
-//             pimage[u][(v * 2) + 1] = gray_value;
-//         }
-//     }
-
-//     const char* c = filename.c_str();
-//     FILE* file = fopen(c, "wb");
-//     if (file) {
-//         png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-//         if (png_ptr) {
-//             png_infop info_ptr = png_create_info_struct(png_ptr);
-//             if (info_ptr) {
-//                 png_init_io(png_ptr, file);
-//                 png_set_IHDR(png_ptr, info_ptr, image_size, image_size, 8, PNG_COLOR_TYPE_GRAY, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-//                 png_write_info(png_ptr, info_ptr);
-//                 png_write_image(png_ptr, pimage);
-//                 png_write_end(png_ptr, NULL);
-//             }
-//             png_destroy_write_struct(&png_ptr, &info_ptr);
-//         }
-//         fclose(file);
-//     }
-
-//     for (idx u = 0; u < image_size; u++) {
-//         delete[] pimage[u];
-//     }
-//     delete[] pimage;
-// }
 
 void write(const std::string& filename,
            const std::vector<std::unique_ptr<buddhabrot>>& brots,
@@ -372,3 +278,38 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+// void write(const std::string& filename,
+//            const std::vector<std::unique_ptr<buddhabrot>>& brots,
+//            const idx image_size) {
+//     double max_val = 0;
+//     double min_val = std::numeric_limits<double>::infinity();
+//     for (idx u = 0; u < image_size; u++) {
+//         for (idx v = 0; v < image_size; v++) {
+//             double x = 0;
+//             for (auto& b : brots) {
+//                 x += (*b)(u, v);
+//             }
+//             if (x < min_val) {
+//                 min_val = x;
+//             }
+//             if (x > max_val) {
+//                 max_val = x;
+//             }
+//         }
+//     }
+
+//     png::image<png::gray_pixel_16> pimage(image_size, image_size);
+//     for (idx u = 0; u < image_size; u++) {
+//         for (idx v = 0; v < image_size; v++) {
+//             double x = 0;
+//             for (auto& b : brots) {
+//                 x += (*b)(u, v);
+//                 x += (*b)(u, image_size - 1 - v);
+//             }
+//             pimage[u][v] = png::gray_pixel_16(
+//                 ((1 << 16) - 1) *
+//                 std::sqrt((x * 0.5 - min_val) / (max_val - min_val)));
+//         }
+//     }
+//     pimage.write(filename);
+// }
